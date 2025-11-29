@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="pt.iscte.metrics.presentation.MainController"
+      prefWidth="1000" prefHeight="700">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="Selecionar Projeto (.java)" onAction="#handleSelectProject"
+                style="-fx-font-size: 14px; -fx-base: #4a90e2; -fx-text-fill: white;"/>
+
+        <Button text="Exportar CSV" onAction="#handleExport"
+                style="-fx-font-size: 14px;"/>
+
+        <Label text="Nenhum projeto carregado" fx:id="lblStatus" style="-fx-text-fill: gray;"/>
+    </HBox>
+
+    <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.6">
+        <TableView fx:id="tblMetrics">
+            <columns>
+                <TableColumn text="Pacote" fx:id="colPackage" prefWidth="150"/>
+                <TableColumn text="Classe" fx:id="colClass" prefWidth="200"/>
+                <TableColumn text="LOC" fx:id="colLoc" prefWidth="60"/>
+                <TableColumn text="Métodos" fx:id="colMethods" prefWidth="70"/>
+                <TableColumn text="WMC" fx:id="colWmc" prefWidth="60"/>
+                <TableColumn text="CBO" fx:id="colCbo" prefWidth="50"/>
+
+                <TableColumn text="DIT" fx:id="colDit" prefWidth="50"/>
+            </columns>
+        </TableView>
+
+        <VBox spacing="15" alignment="TOP_CENTER">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+
+            <Label text="Top Complexidade (WMC)" style="-fx-font-weight: bold;"/>
+            <BarChart fx:id="barChart" animated="true" legendVisible="false">
+                <xAxis>
+                    <CategoryAxis label="Classe" tickLabelRotation="90" animated="false"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="WMC"/>
+                </yAxis>
+            </BarChart>
+
+            <Separator/>
+
+            <Label text="Resumo do Sistema" style="-fx-font-weight: bold;"/>
+            <PieChart fx:id="pieChart" labelsVisible="true"/>
+        </VBox>
+    </SplitPane>
+
+</VBox>
